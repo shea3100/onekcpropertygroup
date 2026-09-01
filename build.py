@@ -11,8 +11,9 @@ SITE = "One KC Property Group, LLC"
 EMAIL = "support@onekcpropertygroup.com"
 PHONE = "(913) 608-7312"
 PHONE_TEL = "+19136087312"
+MAINTENANCE_EMAIL = "maintenance@onekcpropertygroup.com"
 
-CSS_VERSION = "6"
+CSS_VERSION = "7"
 
 # --------------------------------------------------------------------------
 # Photography — free-to-use images from Unsplash, served from their CDN.
@@ -518,7 +519,7 @@ FAQ = page_head(
     "Frequently Asked Questions",
     "Answers to the questions we hear most often from applicants and residents.",
     IMG_INTERIOR_WIDE,
-) + """
+) + f"""
 <section>
   <div class="wrap content">
 
@@ -551,6 +552,32 @@ FAQ = page_head(
     </details>
 
     <details class="faq">
+      <summary>What do I need before move-in?</summary>
+      <div class="answer">
+        <p>We need all of the following before we can release keys:</p>
+        <ul>
+          <li>Lease agreement signed by all parties.</li>
+          <li>Prorated rent, plus any applicable pet and/or HOA fees.</li>
+          <li>Confirmation or account numbers for all utilities.</li>
+          <li>A renters insurance policy emailed to
+          <a href="mailto:{EMAIL}">{EMAIL}</a>, meeting all requirements
+          detailed in your lease.</li>
+        </ul>
+        <p>Specific, detailed instructions are provided once you have confirmed your move-in
+        date with the leasing department.</p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>How do I move in?</summary>
+      <div class="answer">
+        <p>Once we have received all of the required items above, you will get a text message
+        from us with a link to obtain the code to the lockbox at the property. Your keys are
+        inside the lockbox.</p>
+      </div>
+    </details>
+
+    <details class="faq">
       <summary>Will the move-in condition be documented?</summary>
       <div class="answer">
         <p>Yes. We will complete a move-in walkthrough at the time of your move-in. Photos and
@@ -573,6 +600,39 @@ FAQ = page_head(
       <summary>Are there any additional monthly fees, such as a tenant benefit package, annual renewal fee, or administrative fee?</summary>
       <div class="answer">
         <p>No, we do not charge any additional fees unless they are outlined in the lease.</p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>How do I submit a maintenance request?</summary>
+      <div class="answer">
+        <p>Submit maintenance requests through your
+        <a href="{RESIDENT_PORTAL}" rel="noopener">tenant portal</a> &mdash; the same portal you
+        used to apply and to make payments. <strong>Verbal requests and emails are not accepted
+        forms of maintenance request.</strong></p>
+        <p>Any emergency ticket you enter should also be followed by a voice message left on the
+        emergency maintenance line at <a href="tel:{PHONE_TEL}">{PHONE}</a>.</p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>What counts as a maintenance emergency?</summary>
+      <div class="answer">
+        <div class="note" style="margin-top:0"><strong>If you are experiencing a fire, or smoke
+        or sparks in your home, call 911 before contacting One KC Property Group.</strong></div>
+        <p>The following are treated as maintenance emergencies:</p>
+        <ul>
+          <li>Active flooding.</li>
+          <li>A broken pipe or major plumbing leak that is not contained by a tub, sink or toilet.</li>
+          <li>Heating system not functioning, with an inside temperature of 68&deg;F or below.</li>
+          <li>Cooling system not functioning, with an inside temperature of 85&deg;F or above.</li>
+          <li>A clog in the main sewer line, or an uncontained sewage or septic backup.</li>
+          <li>A clogged or non-functioning toilet, if it is the only toilet in the home.</li>
+          <li>No water in the entire home, or no hot water for more than 12 hours, when not
+          related to a utility outage.</li>
+          <li>Complete power failure within the home for more than 12 hours, when not related
+          to a utility power outage.</li>
+        </ul>
       </div>
     </details>
 
@@ -653,12 +713,18 @@ CONTACT = page_head(
   <div class="wrap content">
     <div class="contact-grid">
       <div class="contact-item">
-        <div class="label">Email</div>
+        <div class="label">General inquiries</div>
         <div class="value"><a href="mailto:{EMAIL}">{EMAIL}</a></div>
       </div>
       <div class="contact-item">
         <div class="label">Phone</div>
         <div class="value"><a href="tel:{PHONE_TEL}">{PHONE}</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="label">Maintenance department</div>
+        <div class="value"><a href="mailto:{MAINTENANCE_EMAIL}">{MAINTENANCE_EMAIL}</a></div>
+        <p style="margin:10px 0 0;font-size:.93rem">Current residents: submit maintenance
+        requests through your <a href="{RESIDENT_PORTAL}" rel="noopener">tenant portal</a>.</p>
       </div>
       <div class="contact-item">
         <div class="label">Service area</div>
