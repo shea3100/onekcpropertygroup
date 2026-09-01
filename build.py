@@ -26,7 +26,7 @@ def photo(pid, w=1200, ratio=None):
         url += f"&ar={ratio}"
     return url
 
-IMG_HOME_EXTERIOR = photo("1505843513577-22bb7d21e455", 1400)
+IMG_HOME_EXTERIOR = photo("1647579350413-a6ada4e480ed", 1400)
 IMG_LIVING_ROOM = photo("1705321963943-de94bb3f0dd3", 800)
 IMG_DUSK_HOME = photo("1570905810373-a8ae44f954cb", 1800)
 IMG_MODERN_HOME = photo("1771366260867-7e07094579d7", 1800)
