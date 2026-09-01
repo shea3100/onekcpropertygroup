@@ -168,7 +168,7 @@ def shell(page_file, title, description, body):
           {BRAND_MARK}
           <span class="brand-name">One KC Property Group</span>
         </div>
-        <p style="margin:0;max-width:38ch">A family-owned property management company renting quality homes across the Kansas City metro since 2020.</p>
+        <p style="margin:0;max-width:38ch">A family-owned property management company renting quality homes across the Kansas City metro since 2022.</p>
       </div>
       <div>
         <h4>Pages</h4>
@@ -250,7 +250,7 @@ HOME = f"""
 <div class="hero">
   <div class="wrap">
     <div class="hero-copy">
-      <span class="eyebrow">Family owned since 2020</span>
+      <span class="eyebrow">Family owned since 2022</span>
       <h1>Quality rental homes across the <em>Kansas&nbsp;City</em> metro.</h1>
       <p>We keep our process simple and our expectations clear, so you know exactly
       what it takes to qualify before you apply.</p>
@@ -302,7 +302,7 @@ HOME = f"""
       <div class="card">
         <div class="icon">{ICON_HOME}</div>
         <h3>About Us</h3>
-        <p>A family-owned business since 2020, managing homes for local owners and renting
+        <p>A family-owned business since 2022, managing homes for local owners and renting
         to residents across the metro.</p>
         <a class="more" href="about.html">Learn about us &rarr;</a>
       </div>
@@ -568,16 +568,16 @@ FAQ = page_head(
 
 ABOUT = page_head(
     "About Us",
-    "A family-owned property management company serving the Kansas City metro since 2020.",
+    "A family-owned property management company serving the Kansas City metro since 2022.",
     IMG_STREET,
 ) + f"""
 <section>
   <div class="wrap split">
     <div>
       <span class="eyebrow">Our story</span>
-      <h2>Family owned since 2020</h2>
+      <h2>Family owned since 2022</h2>
       <p class="lede">One KC Property Group, LLC is a family-owned and operated property
-      management company. We started in 2020 with a straightforward idea: manage rental homes
+      management company. We started in 2022 with a straightforward idea: manage rental homes
       the way we would want our own managed &mdash; carefully, honestly, and without the
       surprise fees that have become common in this industry.</p>
       <p>Because we are family run, the person you speak with is the person handling your home.
@@ -669,7 +669,7 @@ CONTACT = page_head(
 
 PAGES = [
     ("index.html", "Home",
-     "One KC Property Group, LLC — a family-owned property management company renting quality homes across the Kansas City metro since 2020.",
+     "One KC Property Group, LLC — a family-owned property management company renting quality homes across the Kansas City metro since 2022.",
      HOME),
     ("requirements.html", "Application Requirements",
      "Application fee, income, credit score, rental history, security deposit, pet policy and renters insurance requirements for One KC Property Group rentals.",
@@ -678,7 +678,7 @@ PAGES = [
      "Frequently asked questions about applying to rent a home with One KC Property Group, including review times, fees, deposits and move-in.",
      FAQ),
     ("about.html", "About Us",
-     "One KC Property Group is a family-owned property management company serving the Kansas City metro since 2020.",
+     "One KC Property Group is a family-owned property management company serving the Kansas City metro since 2022.",
      ABOUT),
     ("contact.html", "Contact",
      "Contact One KC Property Group, LLC by email or phone about rental applications and property management in the Kansas City metro.",
