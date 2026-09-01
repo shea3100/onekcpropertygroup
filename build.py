@@ -12,7 +12,7 @@ EMAIL = "support@onekcpropertygroup.com"
 PHONE = "(913) 608-7312"
 PHONE_TEL = "+19136087312"
 
-CSS_VERSION = "5"
+CSS_VERSION = "6"
 
 # --------------------------------------------------------------------------
 # Photography — free-to-use images from Unsplash, served from their CDN.
@@ -94,12 +94,15 @@ ICON_SCALE = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 ICON_CLOCK = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" '
               'stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.2 2"/></svg>')
 
+RESIDENT_PORTAL = "https://app.tenantcloud.com/login"
+
 NAV = [
     ("index.html", "Home"),
     ("requirements.html", "Application Requirements"),
     ("faq.html", "FAQ"),
     ("about.html", "About Us"),
     ("contact.html", "Contact"),
+    (RESIDENT_PORTAL, "Resident Portal"),
 ]
 
 
@@ -111,14 +114,14 @@ def canonical(page_file):
 
 
 def shell(page_file, title, description, body):
-    nav_items = "\n".join(
-        '        <li><a href="{href}"{cls}>{label}</a></li>'.format(
-            href=href,
-            cls=' class="active"' if href == page_file else "",
-            label=label,
-        )
-        for href, label in NAV
-    )
+    def nav_link(href, label):
+        if href.startswith("http"):
+            return ('        <li><a class="external" href="{}" rel="noopener">{}</a></li>'
+                    .format(href, label))
+        cls = ' class="active"' if href == page_file else ""
+        return '        <li><a href="{}"{}>{}</a></li>'.format(href, cls, label)
+
+    nav_items = "\n".join(nav_link(href, label) for href, label in NAV)
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -187,6 +190,7 @@ def shell(page_file, title, description, body):
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="about.html">About Us</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li><a href="{RESIDENT_PORTAL}" rel="noopener">Resident Portal</a></li>
         </ul>
       </div>
       <div>
