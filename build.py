@@ -13,7 +13,7 @@ PHONE = "(913) 608-7312"
 PHONE_TEL = "+19136087312"
 MAINTENANCE_EMAIL = "maintenance@onekcpropertygroup.com"
 
-CSS_VERSION = "7"
+CSS_VERSION = "8"
 
 # --------------------------------------------------------------------------
 # Photography — free-to-use images from Unsplash, served from their CDN.
@@ -98,11 +98,11 @@ ICON_CLOCK = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 RESIDENT_PORTAL = "https://app.tenantcloud.com/login"
 
 NAV = [
-    ("index.html", "Home"),
-    ("requirements.html", "Application Requirements"),
-    ("faq.html", "FAQ"),
-    ("about.html", "About Us"),
-    ("contact.html", "Contact"),
+    ("/", "Home"),
+    ("/requirements/", "Application Requirements"),
+    ("/faq/", "FAQ"),
+    ("/about/", "About Us"),
+    ("/contact/", "Contact"),
     (RESIDENT_PORTAL, "Resident Portal"),
 ]
 
@@ -110,16 +110,16 @@ NAV = [
 SITE_URL = "https://onekcpropertygroup.com"
 
 
-def canonical(page_file):
-    return SITE_URL + "/" + ("" if page_file == "index.html" else page_file)
+def canonical(url_path):
+    return SITE_URL + url_path
 
 
-def shell(page_file, title, description, body):
+def shell(url_path, title, description, body):
     def nav_link(href, label):
         if href.startswith("http"):
             return ('        <li><a class="external" href="{}" rel="noopener">{}</a></li>'
                     .format(href, label))
-        cls = ' class="active"' if href == page_file else ""
+        cls = ' class="active"' if href == url_path else ""
         return '        <li><a href="{}"{}>{}</a></li>'.format(href, cls, label)
 
     nav_items = "\n".join(nav_link(href, label) for href, label in NAV)
@@ -134,13 +134,13 @@ def shell(page_file, title, description, body):
 <meta property="og:title" content="{title} | One KC Property Group">
 <meta property="og:description" content="{description}">
 <meta property="og:type" content="website">
-<meta property="og:url" content="{canonical(page_file)}">
-<link rel="canonical" href="{canonical(page_file)}">
+<meta property="og:url" content="{canonical(url_path)}">
+<link rel="canonical" href="{canonical(url_path)}">
 <meta name="theme-color" content="#0a2440">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v={CSS_VERSION}">
+<link rel="stylesheet" href="/styles.css?v={CSS_VERSION}">
 <link rel="icon" href="{FAVICON}">
 </head>
 <body>
@@ -154,7 +154,7 @@ def shell(page_file, title, description, body):
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html">
+    <a class="brand" href="/">
       {BRAND_MARK}
       <span class="brand-text">
         <span class="brand-name">One KC Property Group</span><br>
@@ -167,7 +167,7 @@ def shell(page_file, title, description, body):
 {nav_items}
       </ul>
     </nav>
-    <a class="btn btn-primary btn-sm header-cta" href="contact.html">Get in touch</a>
+    <a class="btn btn-primary btn-sm header-cta" href="/contact/">Get in touch</a>
   </div>
 </header>
 
@@ -186,11 +186,11 @@ def shell(page_file, title, description, body):
       <div>
         <h4>Pages</h4>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="requirements.html">Application Requirements</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/requirements/">Application Requirements</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/about/">About Us</a></li>
+          <li><a href="/contact/">Contact</a></li>
           <li><a href="{RESIDENT_PORTAL}" rel="noopener">Resident Portal</a></li>
         </ul>
       </div>
@@ -269,8 +269,8 @@ HOME = f"""
       <p>We keep our process simple and our expectations clear, so you know exactly
       what it takes to qualify before you apply.</p>
       <div class="btn-row">
-        <a class="btn btn-primary" href="requirements.html">Application Requirements</a>
-        <a class="btn btn-ghost" href="faq.html">Read the FAQ</a>
+        <a class="btn btn-primary" href="/requirements/">Application Requirements</a>
+        <a class="btn btn-ghost" href="/faq/">Read the FAQ</a>
       </div>
     </div>
     <div class="hero-media">
@@ -304,21 +304,21 @@ HOME = f"""
         <h3>Application Requirements</h3>
         <p>Application fee, proof of income, credit score bands, rental history, security
         deposit, pets, renters insurance and disqualifying factors.</p>
-        <a class="more" href="requirements.html">View requirements &rarr;</a>
+        <a class="more" href="/requirements/">View requirements &rarr;</a>
       </div>
       <div class="card">
         <div class="icon">{ICON_CHAT}</div>
         <h3>Frequently Asked Questions</h3>
         <p>How long review takes, why there is an application fee, deposits, move-in
         walkthroughs and what condition the home will be in.</p>
-        <a class="more" href="faq.html">Read the FAQ &rarr;</a>
+        <a class="more" href="/faq/">Read the FAQ &rarr;</a>
       </div>
       <div class="card">
         <div class="icon">{ICON_HOME}</div>
         <h3>About Us</h3>
         <p>A family-owned business since 2022, managing homes for local owners and renting
         to residents across the metro.</p>
-        <a class="more" href="about.html">Learn about us &rarr;</a>
+        <a class="more" href="/about/">Learn about us &rarr;</a>
       </div>
     </div>
   </div>
@@ -734,8 +734,8 @@ CONTACT = page_head(
 
     <h2 style="margin-top:52px">Before you contact us</h2>
     <p>Many questions are already answered on our
-    <a href="requirements.html">Application Requirements</a> and
-    <a href="faq.html">FAQ</a> pages &mdash; including application fees, income and credit
+    <a href="/requirements/">Application Requirements</a> and
+    <a href="/faq/">FAQ</a> pages &mdash; including application fees, income and credit
     requirements, pet policy, deposits and move-in timelines.</p>
 
     <div class="note">
@@ -748,38 +748,64 @@ CONTACT = page_head(
 """
 
 
+# (url path, output file, legacy .html filename, title, description, body)
 PAGES = [
-    ("index.html", "Home",
+    ("/", "index.html", None, "Home",
      "One KC Property Group, LLC — a family-owned property management company renting quality homes across the Kansas City metro since 2022.",
      HOME),
-    ("requirements.html", "Application Requirements",
+    ("/requirements/", "requirements/index.html", "requirements.html", "Application Requirements",
      "Application fee, income, credit score, rental history, security deposit, pet policy and renters insurance requirements for One KC Property Group rentals.",
      REQUIREMENTS),
-    ("faq.html", "FAQ",
+    ("/faq/", "faq/index.html", "faq.html", "FAQ",
      "Frequently asked questions about applying to rent a home with One KC Property Group, including review times, fees, deposits and move-in.",
      FAQ),
-    ("about.html", "About Us",
+    ("/about/", "about/index.html", "about.html", "About Us",
      "One KC Property Group is a family-owned property management company serving the Kansas City metro since 2022.",
      ABOUT),
-    ("contact.html", "Contact",
+    ("/contact/", "contact/index.html", "contact.html", "Contact",
      "Contact One KC Property Group, LLC by email or phone about rental applications and property management in the Kansas City metro.",
      CONTACT),
 ]
 
+
+def redirect_stub(new_url):
+    """Old .html address -> new clean URL. Kept so existing links and anything
+    Google already indexed do not 404."""
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Redirecting&hellip;</title>
+<link rel="canonical" href="{SITE_URL}{new_url}">
+<meta http-equiv="refresh" content="0; url={new_url}">
+<meta name="robots" content="noindex">
+</head>
+<body>
+<p>This page has moved to <a href="{new_url}">{SITE_URL}{new_url}</a>.</p>
+<script>location.replace("{new_url}");</script>
+</body>
+</html>
+"""
+
+
 out = os.path.dirname(os.path.abspath(__file__))
 
-for filename, title, desc, body in PAGES:
-    with open(os.path.join(out, filename), "w", encoding="utf-8") as fh:
-        fh.write(shell(filename, title, desc, body))
-    print("wrote", filename)
 
-with open(os.path.join(out, "CNAME"), "w", encoding="utf-8") as fh:
-    fh.write("onekcpropertygroup.com\n")
-print("wrote CNAME")
+def write(relpath, text):
+    path = os.path.join(out, relpath)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as fh:
+        fh.write(text)
+    print("wrote", relpath)
 
-with open(os.path.join(out, ".nojekyll"), "w", encoding="utf-8") as fh:
-    fh.write("")
-print("wrote .nojekyll")
+
+for url_path, outfile, legacy, title, desc, body in PAGES:
+    write(outfile, shell(url_path, title, desc, body))
+    if legacy:
+        write(legacy, redirect_stub(url_path))
+
+write("CNAME", "onekcpropertygroup.com\n")
+write(".nojekyll", "")
 
 # --- SEO: sitemap.xml + robots.txt ---------------------------------------
 import datetime
@@ -788,17 +814,14 @@ today = datetime.date.today().isoformat()
 urls = "\n".join(
     "  <url>\n    <loc>{}</loc>\n    <lastmod>{}</lastmod>\n"
     "    <changefreq>monthly</changefreq>\n    <priority>{}</priority>\n  </url>".format(
-        canonical(f), today, "1.0" if f == "index.html" else "0.8"
+        canonical(u), today, "1.0" if u == "/" else "0.8"
     )
-    for f, _t, _d, _b in PAGES
+    for u, _o, _l, _t, _d, _b in PAGES
 )
 
-with open(os.path.join(out, "sitemap.xml"), "w", encoding="utf-8") as fh:
-    fh.write('<?xml version="1.0" encoding="UTF-8"?>\n'
-             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-             + urls + "\n</urlset>\n")
-print("wrote sitemap.xml")
+write("sitemap.xml",
+      '<?xml version="1.0" encoding="UTF-8"?>\n'
+      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+      + urls + "\n</urlset>\n")
 
-with open(os.path.join(out, "robots.txt"), "w", encoding="utf-8") as fh:
-    fh.write("User-agent: *\nAllow: /\n\nSitemap: " + SITE_URL + "/sitemap.xml\n")
-print("wrote robots.txt")
+write("robots.txt", "User-agent: *\nAllow: /\n\nSitemap: " + SITE_URL + "/sitemap.xml\n")
