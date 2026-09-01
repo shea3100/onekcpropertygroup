@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Generates the static pages for onekcpropertygroup.com from a shared shell."""
+"""Generates the static pages for onekcpropertygroup.com from a shared shell.
+
+Run `python3 build.py` after editing anything in this file, then commit the
+regenerated .html files.
+"""
 
 import os
 
@@ -7,6 +11,28 @@ SITE = "One KC Property Group, LLC"
 EMAIL = "support@onekcpropertygroup.com"
 PHONE = "(913) 608-7312"
 PHONE_TEL = "+19136087312"
+
+CSS_VERSION = "3"
+
+# --------------------------------------------------------------------------
+# Photography — free-to-use images from Unsplash, served from their CDN.
+# To swap in your own photos: drop the files in an /images folder in the repo
+# and replace the URLs below with e.g. "images/front-exterior.jpg".
+# --------------------------------------------------------------------------
+
+def photo(pid, w=1200, ratio=None):
+    url = f"https://images.unsplash.com/photo-{pid}?auto=format&fit=crop&w={w}&q=72"
+    if ratio:
+        url += f"&ar={ratio}"
+    return url
+
+IMG_HOME_EXTERIOR = photo("1751050743813-03d46859896c", 1100)
+IMG_LIVING_ROOM = photo("1705321963943-de94bb3f0dd3", 800)
+IMG_DUSK_HOME = photo("1570905810373-a8ae44f954cb", 1800)
+IMG_MODERN_HOME = photo("1771366260867-7e07094579d7", 1800)
+IMG_STREET = photo("1565829262357-bf9669de2295", 1800)
+IMG_INTERIOR_WIDE = photo("1616137422495-1e9e46e2aa77", 1800)
+IMG_INTERIOR_2 = photo("1616137148650-4aa14651e02b", 1000)
 
 BRAND_MARK = """<svg class="brand-mark" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="One KC Property Group">
         <defs>
@@ -34,6 +60,38 @@ FAVICON = (
     "%3Cpath d='M22.1 28.4h3.8l1.1 8.4a1 1 0 0 1-1 1.1h-4a1 1 0 0 1-1-1.1Z' fill='%23fff'/%3E"
     "%3C/svg%3E"
 )
+
+# Inline icons (stroke style, inherit currentColor)
+ICON_DOC = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" '
+            'stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/>'
+            '<path d="M14 3v5h5"/><path d="M9 13h6"/><path d="M9 17h4"/></svg>')
+
+ICON_CHAT = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" '
+             'stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.4A8 8 0 1 1 21 12Z"/>'
+             '<path d="M9 11h6"/><path d="M9 14.5h3.5"/></svg>')
+
+ICON_HOME = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" '
+             'stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/>'
+             '<path d="M5 9.6V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.6"/><path d="M10 21v-6h4v6"/></svg>')
+
+ICON_SHIELD = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" '
+               'stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.4-3 7.9-7 9-4-1.1-7-4.6-7-9V6Z"/>'
+               '<path d="m9 12 2 2 4-4"/></svg>')
+
+ICON_TAG = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" '
+            'stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 13.3 13.3 20.5a2 2 0 0 1-2.8 0l-7-7A2 2 0 0 1 3 12V5a2 2 0 0 1 2-2h7a2 2 0 0 1 1.4.6l7.1 7.1a2 2 0 0 1 0 2.6Z"/>'
+            '<circle cx="8" cy="8" r="1.4"/></svg>')
+
+ICON_CAMERA = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" '
+               'stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/>'
+               '<circle cx="12" cy="13.5" r="3.4"/></svg>')
+
+ICON_SCALE = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" '
+              'stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16"/><path d="M6 20h12"/>'
+              '<path d="M5 8h14"/><path d="m5 8-2.5 5a2.8 2.8 0 0 0 5 0Z"/><path d="m19 8-2.5 5a2.8 2.8 0 0 0 5 0Z"/></svg>')
+
+ICON_CLOCK = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" '
+              'stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.2 2"/></svg>')
 
 NAV = [
     ("index.html", "Home"),
@@ -64,8 +122,11 @@ def shell(page_file, title, description, body):
 <meta property="og:title" content="{title} | One KC Property Group">
 <meta property="og:description" content="{description}">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#eff7fe">
-<link rel="stylesheet" href="styles.css?v=2">
+<meta name="theme-color" content="#0a2440">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v={CSS_VERSION}">
 <link rel="icon" href="{FAVICON}">
 </head>
 <body>
@@ -92,6 +153,7 @@ def shell(page_file, title, description, body):
 {nav_items}
       </ul>
     </nav>
+    <a class="btn btn-primary btn-sm header-cta" href="contact.html">Get in touch</a>
   </div>
 </header>
 
@@ -101,8 +163,11 @@ def shell(page_file, title, description, body):
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <h4>One KC Property Group</h4>
-        <p style="margin:0">A family-owned property management company serving the Kansas City metro since 2020.</p>
+        <div class="footer-brand">
+          {BRAND_MARK}
+          <span class="brand-name">One KC Property Group</span>
+        </div>
+        <p style="margin:0;max-width:38ch">A family-owned property management company renting quality homes across the Kansas City metro since 2020.</p>
       </div>
       <div>
         <h4>Pages</h4>
@@ -119,6 +184,7 @@ def shell(page_file, title, description, body):
         <ul>
           <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
           <li><a href="tel:{PHONE_TEL}">{PHONE}</a></li>
+          <li>Kansas City metro</li>
         </ul>
       </div>
     </div>
@@ -147,6 +213,34 @@ def shell(page_file, title, description, body):
 """
 
 
+def page_head(title, sub, image):
+    return f"""
+<div class="page-head">
+  <img src="{image}" alt="" loading="eager">
+  <div class="wrap">
+    <h1>{title}</h1>
+    <p>{sub}</p>
+  </div>
+</div>
+"""
+
+
+CTA_BAND = f"""
+<section class="cta">
+  <img src="{IMG_DUSK_HOME}" alt="" loading="lazy">
+  <div class="wrap">
+    <h2>Questions about a property?</h2>
+    <p>Reach out and we will get back to you. We are happy to walk you through the
+    application process before you pay a fee.</p>
+    <div class="btn-row">
+      <a class="btn btn-light" href="mailto:{EMAIL}">Email Us</a>
+      <a class="btn btn-outline-light" href="tel:{PHONE_TEL}">{PHONE}</a>
+    </div>
+  </div>
+</section>
+"""
+
+
 # --------------------------------------------------------------------------
 # Page bodies
 # --------------------------------------------------------------------------
@@ -154,101 +248,107 @@ def shell(page_file, title, description, body):
 HOME = f"""
 <div class="hero">
   <div class="wrap">
-    <h1>Quality rental homes across the Kansas City metro.</h1>
-    <p>One KC Property Group is a family-owned property management company. We keep our
-    process simple and our expectations clear, so you know exactly what it takes to
-    qualify before you apply.</p>
-    <div class="btn-row">
-      <a class="btn btn-primary" href="requirements.html">Application Requirements</a>
-      <a class="btn btn-ghost" href="contact.html">Contact Us</a>
+    <div class="hero-copy">
+      <span class="eyebrow">Family owned since 2020</span>
+      <h1>Quality rental homes across the <em>Kansas City</em> metro.</h1>
+      <p>We keep our process simple and our expectations clear, so you know exactly
+      what it takes to qualify before you apply.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="requirements.html">Application Requirements</a>
+        <a class="btn btn-ghost" href="faq.html">Read the FAQ</a>
+      </div>
     </div>
+    <div class="hero-media">
+      <img class="shot-main" src="{IMG_HOME_EXTERIOR}" alt="A rental home exterior" loading="eager">
+      <img class="shot-sub" src="{IMG_LIVING_ROOM}" alt="A bright living room" loading="lazy">
+      <div class="hero-badge">
+        <strong>2&ndash;3 days</strong>
+        <span>Application review</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="strip">
+  <div class="wrap">
+    <div><span class="num">$44</span><span class="cap">Per applicant</span></div>
+    <div><span class="num">3&times; rent</span><span class="cap">Income required</span></div>
+    <div><span class="num">600+</span><span class="cap">Credit score</span></div>
+    <div><span class="num">12 mo.</span><span class="cap">Minimum lease</span></div>
   </div>
 </div>
 
 <section>
   <div class="wrap">
-    <h2>Everything you need before you apply</h2>
-    <p class="lede">Our requirements are published up front &mdash; income, credit, pets, deposits
-    and the reasons an application can be denied. Read through before submitting so there
-    are no surprises.</p>
+    <div class="section-head">
+      <span class="eyebrow">Before you apply</span>
+      <h2>Everything you need, published up front</h2>
+      <p class="lede">Income, credit, pets, deposits and the reasons an application can be
+      denied &mdash; all of it is on this site. Read through before submitting so there are
+      no surprises.</p>
+    </div>
     <div class="cards">
       <div class="card">
+        <div class="icon">{ICON_DOC}</div>
         <h3>Application Requirements</h3>
         <p>Application fee, proof of income, credit score bands, rental history, security
         deposit, pets, renters insurance and disqualifying factors.</p>
-        <a href="requirements.html">View requirements &rarr;</a>
+        <a class="more" href="requirements.html">View requirements &rarr;</a>
       </div>
       <div class="card">
+        <div class="icon">{ICON_CHAT}</div>
         <h3>Frequently Asked Questions</h3>
         <p>How long review takes, why there is an application fee, deposits, move-in
         walkthroughs and what condition the home will be in.</p>
-        <a href="faq.html">Read the FAQ &rarr;</a>
+        <a class="more" href="faq.html">Read the FAQ &rarr;</a>
       </div>
       <div class="card">
+        <div class="icon">{ICON_HOME}</div>
         <h3>About Us</h3>
         <p>A family-owned business since 2020, managing homes for local owners and renting
         to residents across the metro.</p>
-        <a href="about.html">Learn about us &rarr;</a>
+        <a class="more" href="about.html">Learn about us &rarr;</a>
       </div>
     </div>
   </div>
 </section>
 
 <section class="alt">
-  <div class="wrap">
-    <h2>The short version</h2>
-    <div class="cards cards-4">
-      <div class="card">
-        <span class="stat">$44</span>
-        <h3>Per applicant</h3>
-        <p>Non-refundable application fee, due at submission. Everyone 18 or older applies
-        separately. No administration or lease preparation fees.</p>
-      </div>
-      <div class="card">
-        <span class="stat">3&times; rent</span>
-        <h3>Income requirement</h3>
-        <p>Verifiable gross household income must be at least three times the monthly rent,
-        supported by paystubs, bank statements or tax returns.</p>
-      </div>
-      <div class="card">
-        <span class="stat">600+</span>
-        <h3>Credit score</h3>
-        <p>Scores from 600&ndash;639 may be considered with a double deposit. Below 600 is
-        disqualified.</p>
-      </div>
-      <div class="card">
-        <span class="stat">12 months</span>
-        <h3>Minimum lease</h3>
-        <p>A longer term may be presented for leases starting in winter months. Lease terms
-        are non-negotiable.</p>
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">How we work</span>
+      <h2>Straightforward terms, and no surprise fees</h2>
+      <p class="lede">Because we are family run, the person you speak with is the person
+      handling your home. We keep our portfolio at a size we can genuinely stay on top of.</p>
+      <div class="cards cards-4" style="margin-top:28px">
+        <div class="card">
+          <div class="icon">{ICON_TAG}</div>
+          <h3>No surprise fees</h3>
+          <p style="margin:0">No administration or lease preparation fees, and no monthly tenant
+          benefit packages beyond what is written in your lease.</p>
+        </div>
+        <div class="card">
+          <div class="icon">{ICON_CAMERA}</div>
+          <h3>Documented condition</h3>
+          <p style="margin:0">Every home is professionally cleaned before move-in and we share a
+          photo and video walkthrough with you.</p>
+        </div>
       </div>
     </div>
+    <img src="{IMG_INTERIOR_2}" alt="Interior of a rental home" loading="lazy">
   </div>
 </section>
 
-<section class="cta">
-  <div class="wrap">
-    <h2>Questions about a property?</h2>
-    <p>Reach out and we will get back to you. We are happy to walk you through the
-    application process before you pay a fee.</p>
-    <div class="btn-row">
-      <a class="btn btn-primary" href="mailto:{EMAIL}">Email Us</a>
-      <a class="btn btn-ghost" href="tel:{PHONE_TEL}">{PHONE}</a>
-    </div>
-  </div>
-</section>
+{CTA_BAND}
 """
 
 
-REQUIREMENTS = """
-<div class="page-head">
-  <div class="wrap">
-    <h1>Application Requirements</h1>
-    <p>Please read these requirements in full before submitting an application. Application
-    fees are non-refundable.</p>
-  </div>
-</div>
-
+REQUIREMENTS = page_head(
+    "Application Requirements",
+    "Please read these requirements in full before submitting an application. "
+    "Application fees are non-refundable.",
+    IMG_MODERN_HOME,
+) + """
 <section>
   <div class="wrap content">
 
@@ -399,28 +499,14 @@ REQUIREMENTS = """
 
   </div>
 </section>
-
-<section class="cta">
-  <div class="wrap">
-    <h2>Still have questions?</h2>
-    <p>Our FAQ covers the review timeline, deposits, move-in walkthroughs and more.</p>
-    <div class="btn-row">
-      <a class="btn btn-primary" href="faq.html">Read the FAQ</a>
-      <a class="btn btn-ghost" href="contact.html">Contact Us</a>
-    </div>
-  </div>
-</section>
-"""
+""" + CTA_BAND
 
 
-FAQ = """
-<div class="page-head">
-  <div class="wrap">
-    <h1>Frequently Asked Questions</h1>
-    <p>Answers to the questions we hear most often from applicants and residents.</p>
-  </div>
-</div>
-
+FAQ = page_head(
+    "Frequently Asked Questions",
+    "Answers to the questions we hear most often from applicants and residents.",
+    IMG_INTERIOR_WIDE,
+) + """
 <section>
   <div class="wrap content">
 
@@ -480,88 +566,77 @@ FAQ = """
 
   </div>
 </section>
+""" + CTA_BAND
 
-<section class="cta">
-  <div class="wrap">
-    <h2>Didn&rsquo;t find your answer?</h2>
-    <p>Send us a note and we will get back to you.</p>
-    <div class="btn-row">
-      <a class="btn btn-primary" href="contact.html">Contact Us</a>
-      <a class="btn btn-ghost" href="requirements.html">Application Requirements</a>
+
+ABOUT = page_head(
+    "About Us",
+    "A family-owned property management company serving the Kansas City metro since 2020.",
+    IMG_STREET,
+) + f"""
+<section>
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">Our story</span>
+      <h2>Family owned since 2020</h2>
+      <p class="lede">One KC Property Group, LLC is a family-owned and operated property
+      management company. We started in 2020 with a straightforward idea: manage rental homes
+      the way we would want our own managed &mdash; carefully, honestly, and without the
+      surprise fees that have become common in this industry.</p>
+      <p>Because we are family run, the person you speak with is the person handling your home.
+      We keep our portfolio at a size we can genuinely stay on top of, which means applications
+      get reviewed quickly, maintenance requests reach a real person, and owners hear from us
+      before there is a problem rather than after.</p>
     </div>
+    <img src="{IMG_LIVING_ROOM}" alt="Inside one of our rental homes" loading="lazy">
   </div>
 </section>
-"""
 
-
-ABOUT = """
-<div class="page-head">
+<section class="alt">
   <div class="wrap">
-    <h1>About Us</h1>
-    <p>A family-owned property management company serving the Kansas City metro since 2020.</p>
-  </div>
-</div>
-
-<section>
-  <div class="wrap content">
-    <h2>Family owned since 2020</h2>
-    <p class="lede">One KC Property Group, LLC is a family-owned and operated property
-    management company. We started in 2020 with a straightforward idea: manage rental homes
-    the way we would want our own managed &mdash; carefully, honestly, and without the
-    surprise fees that have become common in this industry.</p>
-
-    <p>Because we are family run, the person you speak with is the person handling your home.
-    We keep our portfolio at a size we can genuinely stay on top of, which means applications
-    get reviewed quickly, maintenance requests reach a real person, and owners hear from us
-    before there is a problem rather than after.</p>
-
-    <h3>How we work</h3>
-    <div class="cards">
+    <div class="section-head center">
+      <span class="eyebrow">How we work</span>
+      <h2>What you can expect from us</h2>
+    </div>
+    <div class="cards cards-4">
       <div class="card">
+        <div class="icon">{ICON_DOC}</div>
         <h3>Clear expectations</h3>
-        <p>Our full application requirements are published on this site. You will know whether
-        you qualify before you pay an application fee.</p>
+        <p style="margin:0">Our full application requirements are published on this site. You will
+        know whether you qualify before you pay an application fee.</p>
       </div>
       <div class="card">
+        <div class="icon">{ICON_TAG}</div>
         <h3>No surprise fees</h3>
-        <p>No administration fees, no lease preparation fees, and no monthly tenant benefit
-        packages or renewal fees beyond what is written in your lease.</p>
+        <p style="margin:0">No administration fees, no lease preparation fees, and no monthly
+        tenant benefit packages or renewal fees beyond what is written in your lease.</p>
       </div>
       <div class="card">
+        <div class="icon">{ICON_CAMERA}</div>
         <h3>Documented condition</h3>
-        <p>Every home is professionally cleaned before move-in, and we complete a documented
-        walkthrough with photos and video that we share with you.</p>
+        <p style="margin:0">Every home is professionally cleaned before move-in, and we complete a
+        documented walkthrough with photos and video that we share with you.</p>
       </div>
       <div class="card">
+        <div class="icon">{ICON_SCALE}</div>
         <h3>Fair housing</h3>
-        <p>We comply with all federal, state and local fair housing laws and do not
+        <p style="margin:0">We comply with all federal, state and local fair housing laws and do not
         discriminate in the rental, lease or negotiation for real property.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="cta">
-  <div class="wrap">
-    <h2>Looking for a home, or need a manager for yours?</h2>
-    <p>We would be glad to hear from you either way.</p>
-    <div class="btn-row">
-      <a class="btn btn-primary" href="contact.html">Get in touch</a>
-    </div>
-  </div>
-</section>
+{CTA_BAND}
 """
 
 
-CONTACT = f"""
-<div class="page-head">
-  <div class="wrap">
-    <h1>Contact Us</h1>
-    <p>Questions about an application, a property, or managing your rental home? Reach out
-    and we will get back to you.</p>
-  </div>
-</div>
-
+CONTACT = page_head(
+    "Contact Us",
+    "Questions about an application, a property, or managing your rental home? "
+    "Reach out and we will get back to you.",
+    IMG_HOME_EXTERIOR,
+) + f"""
 <section>
   <div class="wrap content">
     <div class="contact-grid">
@@ -579,7 +654,7 @@ CONTACT = f"""
       </div>
     </div>
 
-    <h2 style="margin-top:46px">Before you contact us</h2>
+    <h2 style="margin-top:52px">Before you contact us</h2>
     <p>Many questions are already answered on our
     <a href="requirements.html">Application Requirements</a> and
     <a href="faq.html">FAQ</a> pages &mdash; including application fees, income and credit
@@ -596,11 +671,21 @@ CONTACT = f"""
 
 
 PAGES = [
-    ("index.html", "Home", "One KC Property Group, LLC — a family-owned property management company renting quality homes across the Kansas City metro since 2020.", HOME),
-    ("requirements.html", "Application Requirements", "Application fee, income, credit score, rental history, security deposit, pet policy and renters insurance requirements for One KC Property Group rentals.", REQUIREMENTS),
-    ("faq.html", "FAQ", "Frequently asked questions about applying to rent a home with One KC Property Group, including review times, fees, deposits and move-in.", FAQ),
-    ("about.html", "About Us", "One KC Property Group is a family-owned property management company serving the Kansas City metro since 2020.", ABOUT),
-    ("contact.html", "Contact", "Contact One KC Property Group, LLC by email or phone about rental applications and property management in the Kansas City metro.", CONTACT),
+    ("index.html", "Home",
+     "One KC Property Group, LLC — a family-owned property management company renting quality homes across the Kansas City metro since 2020.",
+     HOME),
+    ("requirements.html", "Application Requirements",
+     "Application fee, income, credit score, rental history, security deposit, pet policy and renters insurance requirements for One KC Property Group rentals.",
+     REQUIREMENTS),
+    ("faq.html", "FAQ",
+     "Frequently asked questions about applying to rent a home with One KC Property Group, including review times, fees, deposits and move-in.",
+     FAQ),
+    ("about.html", "About Us",
+     "One KC Property Group is a family-owned property management company serving the Kansas City metro since 2020.",
+     ABOUT),
+    ("contact.html", "Contact",
+     "Contact One KC Property Group, LLC by email or phone about rental applications and property management in the Kansas City metro.",
+     CONTACT),
 ]
 
 out = os.path.dirname(os.path.abspath(__file__))
