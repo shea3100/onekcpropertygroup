@@ -26,13 +26,14 @@ def photo(pid, w=1200, ratio=None):
         url += f"&ar={ratio}"
     return url
 
-IMG_HOME_EXTERIOR = photo("1751050743813-03d46859896c", 1100)
+IMG_HOME_EXTERIOR = photo("1505843513577-22bb7d21e455", 1400)
 IMG_LIVING_ROOM = photo("1705321963943-de94bb3f0dd3", 800)
 IMG_DUSK_HOME = photo("1570905810373-a8ae44f954cb", 1800)
 IMG_MODERN_HOME = photo("1771366260867-7e07094579d7", 1800)
 IMG_STREET = photo("1565829262357-bf9669de2295", 1800)
 IMG_INTERIOR_WIDE = photo("1616137422495-1e9e46e2aa77", 1800)
 IMG_INTERIOR_2 = photo("1616137148650-4aa14651e02b", 1000)
+IMG_CONTACT_HEAD = photo("1751050743813-03d46859896c", 1800)
 
 BRAND_MARK = """<svg class="brand-mark" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="One KC Property Group">
         <defs>
@@ -631,7 +632,7 @@ CONTACT = page_head(
     "Contact Us",
     "Questions about an application, a property, or managing your rental home? "
     "Reach out and we will get back to you.",
-    IMG_HOME_EXTERIOR,
+    IMG_CONTACT_HEAD,
 ) + f"""
 <section>
   <div class="wrap content">
