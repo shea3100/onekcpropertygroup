@@ -103,6 +103,13 @@ NAV = [
 ]
 
 
+SITE_URL = "https://onekcpropertygroup.com"
+
+
+def canonical(page_file):
+    return SITE_URL + "/" + ("" if page_file == "index.html" else page_file)
+
+
 def shell(page_file, title, description, body):
     nav_items = "\n".join(
         '        <li><a href="{href}"{cls}>{label}</a></li>'.format(
@@ -123,6 +130,8 @@ def shell(page_file, title, description, body):
 <meta property="og:title" content="{title} | One KC Property Group">
 <meta property="og:description" content="{description}">
 <meta property="og:type" content="website">
+<meta property="og:url" content="{canonical(page_file)}">
+<link rel="canonical" href="{canonical(page_file)}">
 <meta name="theme-color" content="#0a2440">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -701,3 +710,25 @@ print("wrote CNAME")
 with open(os.path.join(out, ".nojekyll"), "w", encoding="utf-8") as fh:
     fh.write("")
 print("wrote .nojekyll")
+
+# --- SEO: sitemap.xml + robots.txt ---------------------------------------
+import datetime
+
+today = datetime.date.today().isoformat()
+urls = "\n".join(
+    "  <url>\n    <loc>{}</loc>\n    <lastmod>{}</lastmod>\n"
+    "    <changefreq>monthly</changefreq>\n    <priority>{}</priority>\n  </url>".format(
+        canonical(f), today, "1.0" if f == "index.html" else "0.8"
+    )
+    for f, _t, _d, _b in PAGES
+)
+
+with open(os.path.join(out, "sitemap.xml"), "w", encoding="utf-8") as fh:
+    fh.write('<?xml version="1.0" encoding="UTF-8"?>\n'
+             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+             + urls + "\n</urlset>\n")
+print("wrote sitemap.xml")
+
+with open(os.path.join(out, "robots.txt"), "w", encoding="utf-8") as fh:
+    fh.write("User-agent: *\nAllow: /\n\nSitemap: " + SITE_URL + "/sitemap.xml\n")
+print("wrote robots.txt")
