@@ -8,6 +8,33 @@ EMAIL = "support@onekcpropertygroup.com"
 PHONE = "(913) 608-7312"
 PHONE_TEL = "+19136087312"
 
+BRAND_MARK = """<svg class="brand-mark" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="One KC Property Group">
+        <defs>
+          <linearGradient id="okcMark" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#5fb0f2"/>
+            <stop offset="55%" stop-color="#2f8ae4"/>
+            <stop offset="100%" stop-color="#0f5aa8"/>
+          </linearGradient>
+        </defs>
+        <path d="M24 3.2 46 20.4v21.2a3.2 3.2 0 0 1-3.2 3.2H5.2A3.2 3.2 0 0 1 2 41.6V20.4Z" fill="url(#okcMark)"/>
+        <path d="M24 3.2 46 20.4H2Z" fill="#ffffff" opacity=".16"/>
+        <circle cx="24" cy="25.4" r="4.3" fill="#ffffff"/>
+        <path d="M22.1 28.4h3.8l1.1 8.4a1 1 0 0 1-1 1.1h-4a1 1 0 0 1-1-1.1Z" fill="#ffffff"/>
+      </svg>"""
+
+FAVICON = (
+    "data:image/svg+xml,"
+    "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E"
+    "%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E"
+    "%3Cstop offset='0%25' stop-color='%235fb0f2'/%3E"
+    "%3Cstop offset='100%25' stop-color='%230f5aa8'/%3E"
+    "%3C/linearGradient%3E%3C/defs%3E"
+    "%3Cpath d='M24 3.2 46 20.4v21.2a3.2 3.2 0 0 1-3.2 3.2H5.2A3.2 3.2 0 0 1 2 41.6V20.4Z' fill='url(%23g)'/%3E"
+    "%3Ccircle cx='24' cy='25.4' r='4.3' fill='%23fff'/%3E"
+    "%3Cpath d='M22.1 28.4h3.8l1.1 8.4a1 1 0 0 1-1 1.1h-4a1 1 0 0 1-1-1.1Z' fill='%23fff'/%3E"
+    "%3C/svg%3E"
+)
+
 NAV = [
     ("index.html", "Home"),
     ("requirements.html", "Application Requirements"),
@@ -37,8 +64,9 @@ def shell(page_file, title, description, body):
 <meta property="og:title" content="{title} | One KC Property Group">
 <meta property="og:description" content="{description}">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#eff7fe">
 <link rel="stylesheet" href="styles.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%2312294a'/><text x='32' y='43' font-size='30' font-family='Helvetica,Arial' font-weight='bold' fill='%23c8873c' text-anchor='middle'>1KC</text></svg>">
+<link rel="icon" href="{FAVICON}">
 </head>
 <body>
 
@@ -52,7 +80,7 @@ def shell(page_file, title, description, body):
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html">
-      <span class="brand-mark">1KC</span>
+      {BRAND_MARK}
       <span class="brand-text">
         <span class="brand-name">One KC Property Group</span><br>
         <span class="brand-sub">Kansas City Rentals</span>
@@ -171,22 +199,26 @@ HOME = f"""
     <h2>The short version</h2>
     <div class="cards cards-4">
       <div class="card">
-        <h3>$44 per applicant</h3>
+        <span class="stat">$44</span>
+        <h3>Per applicant</h3>
         <p>Non-refundable application fee, due at submission. Everyone 18 or older applies
         separately. No administration or lease preparation fees.</p>
       </div>
       <div class="card">
-        <h3>3&times; the monthly rent</h3>
+        <span class="stat">3&times; rent</span>
+        <h3>Income requirement</h3>
         <p>Verifiable gross household income must be at least three times the monthly rent,
         supported by paystubs, bank statements or tax returns.</p>
       </div>
       <div class="card">
-        <h3>600 minimum credit score</h3>
+        <span class="stat">600+</span>
+        <h3>Credit score</h3>
         <p>Scores from 600&ndash;639 may be considered with a double deposit. Below 600 is
         disqualified.</p>
       </div>
       <div class="card">
-        <h3>12-month minimum lease</h3>
+        <span class="stat">12 months</span>
+        <h3>Minimum lease</h3>
         <p>A longer term may be presented for leases starting in winter months. Lease terms
         are non-negotiable.</p>
       </div>
@@ -482,12 +514,6 @@ ABOUT = """
     We keep our portfolio at a size we can genuinely stay on top of, which means applications
     get reviewed quickly, maintenance requests reach a real person, and owners hear from us
     before there is a problem rather than after.</p>
-
-    <h3>What we do</h3>
-    <p>We manage single-family rental homes across the Kansas City metro on behalf of local
-    property owners, and we lease those homes to residents. That covers marketing and showings,
-    resident screening, lease preparation, rent collection, maintenance coordination, and
-    periodic property walkthroughs documented for the owner.</p>
 
     <h3>How we work</h3>
     <div class="cards">
