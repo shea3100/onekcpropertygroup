@@ -65,7 +65,7 @@ def shell(page_file, title, description, body):
 <meta property="og:description" content="{description}">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#eff7fe">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=2">
 <link rel="icon" href="{FAVICON}">
 </head>
 <body>
