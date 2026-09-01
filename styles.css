@@ -249,21 +249,6 @@ nav.main-nav a.active { background: var(--blue-100); color: var(--blue-700); }
   box-shadow: var(--shadow-md);
 }
 
-.hero-badge {
-  position: absolute;
-  right: -14px;
-  top: 30px;
-  background: #fff;
-  border-radius: var(--r);
-  box-shadow: var(--shadow-md);
-  padding: 14px 20px;
-  text-align: center;
-  line-height: 1.25;
-}
-
-.hero-badge strong { display: block; font-size: 1.3rem; color: var(--ink); font-weight: 800; letter-spacing: -.5px; }
-.hero-badge span { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--blue-600); font-weight: 700; }
-
 /* ---------- Trust strip ---------- */
 
 .strip { background: var(--navy); color: #fff; padding: 34px 0; }
@@ -559,7 +544,6 @@ footer.site-footer a:hover { color: #fff; text-decoration: underline; }
   .hero .wrap { grid-template-columns: 1fr; gap: 52px; }
   .hero-media { max-width: 560px; }
   .hero-media .shot-sub { left: -12px; bottom: -22px; }
-  .hero-badge { right: 8px; }
   .split { grid-template-columns: 1fr; gap: 34px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }

@@ -12,7 +12,7 @@ EMAIL = "support@onekcpropertygroup.com"
 PHONE = "(913) 608-7312"
 PHONE_TEL = "+19136087312"
 
-CSS_VERSION = "4"
+CSS_VERSION = "5"
 
 # --------------------------------------------------------------------------
 # Photography — free-to-use images from Unsplash, served from their CDN.
@@ -261,10 +261,6 @@ HOME = f"""
     <div class="hero-media">
       <img class="shot-main" src="{IMG_HOME_EXTERIOR}" alt="A rental home exterior" loading="eager">
       <img class="shot-sub" src="{IMG_LIVING_ROOM}" alt="A bright living room" loading="lazy">
-      <div class="hero-badge">
-        <strong>2&ndash;3 days</strong>
-        <span>Application review</span>
-      </div>
     </div>
   </div>
 </div>
