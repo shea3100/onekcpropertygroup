@@ -12,7 +12,7 @@ EMAIL = "support@onekcpropertygroup.com"
 PHONE = "(913) 608-7312"
 PHONE_TEL = "+19136087312"
 
-CSS_VERSION = "3"
+CSS_VERSION = "4"
 
 # --------------------------------------------------------------------------
 # Photography — free-to-use images from Unsplash, served from their CDN.
@@ -250,7 +250,7 @@ HOME = f"""
   <div class="wrap">
     <div class="hero-copy">
       <span class="eyebrow">Family owned since 2020</span>
-      <h1>Quality rental homes across the <em>Kansas City</em> metro.</h1>
+      <h1>Quality rental homes across the <em>Kansas&nbsp;City</em> metro.</h1>
       <p>We keep our process simple and our expectations clear, so you know exactly
       what it takes to qualify before you apply.</p>
       <div class="btn-row">
