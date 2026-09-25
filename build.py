@@ -95,7 +95,7 @@ ICON_SCALE = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 ICON_CLOCK = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" '
               'stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.2 2"/></svg>')
 
-RESIDENT_PORTAL = "https://app.tenantcloud.com/login"
+RESIDENT_PORTAL = "https://renter.turbotenant.com/"
 
 NAV = [
     ("/", "Home"),
@@ -282,10 +282,10 @@ HOME = f"""
 
 <div class="strip">
   <div class="wrap">
-    <div><span class="num">$44</span><span class="cap">Per applicant</span></div>
-    <div><span class="num">3&times; rent</span><span class="cap">Income required</span></div>
-    <div><span class="num">600+</span><span class="cap">Credit score</span></div>
-    <div><span class="num">12 mo.</span><span class="cap">Minimum lease</span></div>
+    <div><span class="num">7 yrs</span><span class="cap">Real estate experience</span></div>
+    <div><span class="num">$0</span><span class="cap">Hidden fees</span></div>
+    <div><span class="num">Dedicated</span><span class="cap">Property managers</span></div>
+    <div><span class="num">Fast</span><span class="cap">Maintenance response</span></div>
   </div>
 </div>
 

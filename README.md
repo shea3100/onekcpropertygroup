@@ -18,7 +18,7 @@ No framework, no build tools required to make edits. `build.py` is optional
 | About Us | `https://onekcpropertygroup.com/about/` |
 | Contact | `https://onekcpropertygroup.com/contact/` |
 
-The "Resident Portal" nav item is an external link to TenantCloud, not a page
+The "Resident Portal" nav item is an external link to TurboTenant, not a page
 in this repo.
 
 ---
