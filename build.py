@@ -12,6 +12,7 @@ EMAIL = "support@onekcpropertygroup.com"
 PHONE = "(913) 608-7312"
 PHONE_TEL = "+19136087312"
 MAINTENANCE_EMAIL = "maintenance@onekcpropertygroup.com"
+LEASING_EMAIL = "leasing@onekcpropertygroup.com"
 
 CSS_VERSION = "8"
 
@@ -715,6 +716,12 @@ CONTACT = page_head(
       <div class="contact-item">
         <div class="label">General inquiries</div>
         <div class="value"><a href="mailto:{EMAIL}">{EMAIL}</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="label">Leasing inquiries</div>
+        <div class="value"><a href="mailto:{LEASING_EMAIL}">{LEASING_EMAIL}</a></div>
+        <p style="margin:10px 0 0;font-size:.93rem">Questions about available homes,
+        showings or your application.</p>
       </div>
       <div class="contact-item">
         <div class="label">Phone</div>
